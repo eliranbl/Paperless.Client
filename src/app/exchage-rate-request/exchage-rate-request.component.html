@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-content>
+        <form>
+            <mat-form-field class="example-full-width">
+                <mat-label>Type date</mat-label>
+                <input matInput placeholder="YYMM format" type="number" [formControl]="date">
+                <mat-error *ngIf="date.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button class="send-button" color="primary" [disabled]="date.invalid"
+                (click)="send()">Primary</button>
+        </form>
+        <hr>
+        <app-exchage-rate-response *ngIf="response" [graphResponse]="response"></app-exchage-rate-response>
+    </mat-card-content>
+</mat-card>
