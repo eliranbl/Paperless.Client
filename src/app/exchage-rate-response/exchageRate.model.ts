@@ -1,10 +1,5 @@
 export class ExchageRateResponse {
-    GRAPH: Graph[]
-    Min: number
-    Max: number
+    GRAPH: any[]
 }
 
-export class Graph {
-    DayOfMonth: number
-    Rate: number
-}
+

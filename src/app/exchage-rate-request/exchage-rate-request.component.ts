@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExchageRateService } from '../exchage-rate-response/exchageRate.services';
-import { Graph } from '../exchage-rate-response/exchageRate.model';
+
 
 @Component({
   selector: 'app-exchage-rate-request',
@@ -10,12 +10,12 @@ import { Graph } from '../exchage-rate-response/exchageRate.model';
 })
 
 export class ExchageRateRequestComponent {
-  response: Graph[];
+  response: any[];
   constructor(private exchageRateService: ExchageRateService) {
   }
 
   isBtnEnabled: boolean = false;
-  date = new FormControl('', [Validators.required, Validators.pattern("^([0-9]{2})(0[1-9]|1[0-2])$")]);
+  date = new FormControl('', [Validators.required, Validators.pattern("^([0-2]{1})([0-9]{1})(0[1-9]|1[0-2])$")]);
 
   getErrorMessage() {
     if (this.date.hasError('required')) {
@@ -23,7 +23,7 @@ export class ExchageRateRequestComponent {
     }
 
     if (this.date.hasError('pattern')) {
-      return 'The formt have to be YYMM';
+      return 'The formt have to be YYMM year start from 00';
     }
     else {
       return '';
@@ -33,7 +33,7 @@ export class ExchageRateRequestComponent {
   send() {
     this.exchageRateService.getExchageRate(this.date.value)
       .subscribe(data => {
-        this.response = data.GRAPH;
+        this.response = data.GRAPH[0];
       })
   }
 }

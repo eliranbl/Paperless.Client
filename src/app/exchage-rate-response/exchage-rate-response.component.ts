@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Graph } from './exchageRate.model';
+
+export interface RowElement {
+  key: string;
+  value: string;
+}
 
 @Component({
   selector: 'app-exchage-rate-response',
@@ -8,12 +12,15 @@ import { Graph } from './exchageRate.model';
 })
 
 export class ExchageRateResponseComponent implements OnInit {
-  @Input() graphResponse: Graph[];
-  displayedColumns: string[] = ['daty on moth', 'rate'];
-  dataSource: Graph[];
+  @Input() graphResponse: any[];
+  displayedColumns: string[] = ["key", "value"];
+  dataSource: RowElement[] = [];
   constructor() { }
 
   ngOnInit(): void {
-    this.dataSource = this.graphResponse;
+
+    for (const key in this.graphResponse) {
+      this.dataSource.push({ key, value: this.graphResponse[key] });
+    }
   }
 }
