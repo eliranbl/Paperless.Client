@@ -8,7 +8,7 @@
             </mat-form-field>
 
             <button mat-raised-button class="send-button" color="primary" [disabled]="date.invalid"
-                (click)="send()">Primary</button>
+                (click)="send()">Send</button>
         </form>
         <hr>
         <app-exchage-rate-response *ngIf="response" [graphResponse]="response"></app-exchage-rate-response>
